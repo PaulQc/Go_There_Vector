@@ -1,6 +1,4 @@
 
-#import io
-
 from flask import Flask, render_template, Response, session, request
 from camera import Camera, VectorCamera
 from go_there_helper import Messages, VectorStatus
@@ -10,8 +8,6 @@ from anki_vector.util import degrees, distance_mm, speed_mmps
 from tracking import TrackingDot
 import numpy as np
 import cv2
-#from PIL import Image
-#import os
 
 app = Flask(__name__)
 app.secret_key = 'the random string for Vector in Quebec city'.encode('utf8')
@@ -23,9 +19,6 @@ app.frame = ''
 def index():
     """Page d'entré pour l'interaction avec Vector"""
     # Crée/initialise des variables pour cette session
-    #session['move_status'] = ''
-    #session['desired_pos'] = (320., 240.)  # Par défaut, au centre de l'image
-    #
     text = app.messages.message['initial']
     if session.get('required_message') is not None:
         text = app.messages.message[session['required_message']]
