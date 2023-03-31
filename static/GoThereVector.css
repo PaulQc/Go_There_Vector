@@ -1,0 +1,58 @@
+@charset "UTF-8";
+html {
+    box-sizing: border-box;
+}
+* {
+  box-sizing: inherit;
+}
+#group_interactive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+body {
+    text-align: center;
+    background-color: #faf2e4;
+    margin: 0 10%;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.5em;
+    font-family: serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    border-bottom: 1px solid #57b1dc;
+    margin-top: 30px;
+}
+#action_instruction {
+    background-color: lightskyblue;
+    width: 640px;
+    border-radius: 1em;
+}
+#group_vector_view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#title_vector_view {
+    font-style: oblique;
+    line-height: 150%;
+    background-color: lightskyblue;
+    width: 600px;
+    border-radius: 1em;
+}
+span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#espace {
+    height: 150px ;
+    width: 20px;
+}
+footer {
+    border-bottom: 1px solid #57b1dc;
+}

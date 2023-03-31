@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon robot Vector</title>
+    <style>
+    @import "../static/GoThereVector.css";
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
+</head>
+<body>
+<div id="group_interactive">
+    <div class="box1_1">
+    <h1>Interaction en direct avec mon robot Vector</h1>
+    </div>
+    <div class="box1_2" id="action_instruction">
+        <p> {{ text|safe }}</p>
+    </div>
+    <div class="box1_3" id="video_general">
+        <!--<p><img src="../static/espace_jeu.jpg" alt="Video en direct de l'espace jeu de Vector"></p>-->
+        <p><img src="{{ url_for('video_feed') }}" alt="Video en direct de l'espace jeu de Vector"></p>
+    </div>
+</div>
+<div id="group_vector_view" >
+    <span class="box2_1" id="title_vector_view">
+        <p>Ci dessous, ce que voit Vector !</p>
+    </span>
+    <!-- <span class="box_2.2" id="espace">&nbsp; </span> Élément que j'ai mis pour ajouter un espace -->
+    <div class="box2_3" id="video_vector_view">
+        <!-- <img src="../static/1S_001_16.jpg" width="320" height="240"> -->
+        <p><img src="{{ url_for('vector_video_feed') }}" alt="Video en direct de ce que voit Vector"></p>
+    </div>
+</div>
+    <footer>
+    </footer>
+<script type="text/javascript">
+    fetch("/move_to");
+    function moveHandler() {
+        fetch("/move_status")
+            .then((response) => response.text())
+            .then((text) => {
+                if (text == "finished") {
+                    window.location = "/" ;
+                }
+            })
+    };
+    document.addEventListener('mousemove', moveHandler);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon robot Vector</title>
+    <style>
+    @import "../static/GoThereVector.css";
+    </style>
+</head>
+<body>
+<div id="group_interactive">
+    <div class="box1_1">
+    <h1>Interaction en direct avec mon robot Vector</h1>
+    </div>
+    <div class="box1_2" id="action_instruction">
+        <!-- <p> Ici bas, l'espace de jeu de Vector <br> <b><em id="request-pos">Cliquez</em></b> dans l'image
+            pour indiquer à Vector l'endroit où vous désirez qu'il se rendre</p> -->
+        <p> {{ text|safe }}</p>
+    </div>
+    <div class="box1_3" id="video_general">
+        <!--<p><img src="../static/espace_jeu.jpg" alt="Video en direct de l'espace jeu de Vector"></p> -->
+        <p><img src="{{ url_for('video_feed') }}" alt="Video en direct de l'espace jeu de Vector"></p>
+    </div>
+</div>
+<footer>
+</footer>
+
+<script type="text/javascript">
+    function getMousePosition(video_box, event) {
+        let rect = video_box.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
+        let data = JSON.stringify({x:x, y:y}) ;
+        const request = new Request('/go_there', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',},
+            body: data});
+        fetch(request)
+            .then((response) => response.text())
+            .then((text) => {
+                if (text == 'available') {
+                    window.location = "/go";  /* Affiche la page spécifique et execute le déplacement */
+                    /* fetch("/move_to"); */
+                } else {
+                    window.location = "/" ;   /* Vector Non disponible, retour à la page d'entré */
+                }});
+    }
+
+    let video_box = document.getElementById("video_general");
+    video_box.addEventListener("click", function(e)
+        {
+            getMousePosition(video_box, e);
+        });
+
+
+</script>
+
+</body>
+</html>
